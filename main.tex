@@ -15,8 +15,9 @@
 \usepackage{amsmath}
 \usepackage{graphicx}
 
-%\usepackage{tgbonum}
-%\usepackage{newtxmath}
+
+\usepackage{tgbonum}
+\usepackage{newtxmath}
 
 \usepackage[utf8]{inputenc}
 \usepackage{siunitx}
@@ -59,7 +60,7 @@
 }
 
 \usepackage[explicit]{titlesec}
-
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 % -------------------
 
 % -------------------
@@ -79,7 +80,7 @@
 \theoremstyle{remark}
 \newtheorem*{remark}{Note}
 \theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
+\newtheorem{definition}{}[]
 \renewcommand\qedsymbol{$\blacksquare$}
 %
 
@@ -230,9 +231,9 @@ konjugat af den ket vektor den er dual på
 \leftrightarrow \bra V
   \end{align}
   Dualrum $\mathcal H^*$ består af linære afbildninger $\H^*\to \H$,
-defineret med det indre produkt for $\langle \phi,\cdot \rangle\in
-\H^$ som $\langle \phi,\cdot\rangle : \psi \mapsto
-\braket{\phi}{\psi}$.
+defineret med det indre produkt for $\langle \varphi,\cdot \rangle\in
+\H^$ som $\langle \varphi,\cdot\rangle : \psi \mapsto
+\braket{\varphi}{\psi}$.
 \end{definition}
 
 
@@ -246,7 +247,7 @@ funktion $T:\mathbb V_1 \to \mathbb V_2$ således at
 \end{align}
 Igennem denne tekst vil de kun repræsenteres som matricer $M$, således
 at $T(x)=Mx$. En linær operator kan i øvrigt repræsenteres som $\ket
-\psi \bra \phi \in \mathcal H \otimes \mathcal H^*$.
+\psi \bra \varphi \in \mathcal H \otimes \mathcal H^*$.
 
 \end{definition}
 
@@ -339,13 +340,14 @@ I kvanteteori bliver vi nødt til at beskrive disse kvantiteter, $p$ og $x$ (og 
 
 \newpage
 \section{1-dimensionel uendelig partkelbrønd}
+\subsection{Beskrivelse}
 \begin{figure}[!h]
     \centering
     \includegraphics[scale=0.16]{diagram-20201209.png}
-    \caption{$V(x)$ potentialet}
+    \caption{$V(x)$ potentialet. Partiklet befinder sig i en uendeligt dyb ``tom dåse'' eller ``brønd''.}
     \label{fig:pot1}
 \end{figure}
-Vi begynder med en beskrivelse af et 1-dimensionelt potentiale $V(x)$ som set på Figur \ref{fig:pot1}. Potentialet er $\infty$ udenfor længden $L$, samt 0 indenfor, heraf navnet ``partikelbrønd''. Dette kan beskrives således
+Vi begynder med en beskrivelse af et 1-dimensionelt potentiale $V(x)$ som set på Figur \ref{fig:pot1}. Potentialet er $\infty$ udenfor længden $L$, samt 0 indenfor. Dette kan beskrives således
 \begin{align}
     V(x) = \begin{cases}
     0, & -\frac{L}{2} < x < \frac{L}{2} \\
@@ -353,6 +355,7 @@ Vi begynder med en beskrivelse af et 1-dimensionelt potentiale $V(x)$ som set p�
     \infty, & x \geq \frac{L}{2}
     \end{cases}
 \end{align}
+\subsection{Analytisk løsning af TISE}
 I en positionsbasis kan vi omskrive TISE fra (\ref{tise}) til
 \begin{align}
      \label{awdb}
@@ -400,20 +403,33 @@ Jeg undersøger nu hvor denne nulfaktor skal komme fra ved $x=+L/2,-L/2$. Antage
     B\cos\qty(\frac{n\pi x}{L}) & n=\pm1,~\pm 3,\dots
     \end{cases}
 \end{align}
-Vi kan kort konkludere at $A=B$, samt finde normaliseringsfaktoren som
+Man kan kort konkludere at $A=B$, samt finde normaliseringsfaktoren som
 \begin{align}
 \begin{split}
     \braket{\psi_n}{\psi_n} &= A \int_{-\frac{L}{2}}^{\frac{L}{2}} \sin^2\qty(\frac{n\pi x}{L})~dx=1 \\
     A &= \sqrt{\frac{2}{L}}
 \end{split}
 \end{align}
-Vi kan udlede energiegenværdierne $E_n$ fra relationen
+Man kan udlede energiegenværdierne $E_n$ fra relationen
 \begin{align}
     k = \sqrt{\frac{2mE_n}{\hbar^2}} &= \frac{n\pi}{L}
 \end{align}
-da får vi
+da får man
 \begin{align}
     E_n = \frac{\hbar^2}{2m}k^2_n = \frac{\hbar^2\pi^2n^2}{2mL^2}
+\end{align}
+
+Med udgangspunktet i TDSE fra (\ref{eq:schr}) kan vi nu konstruere en tidsudvikling, også kaldt en stationær tilstand. Dette ligger i en antagelse af separation af variable som
+\begin{align}
+    \psi(x,t) = \hat K(t) \ket{\psi(x)}
+\end{align}
+For at opfylde TDSE, får vi da løsningen
+\begin{align}
+    \psi_n(x,t) = A\psi_n(x)e^{-iE_nt/\hbar}
+\end{align}
+Enhver linær kombination $\Psi$ vil også befinde sig i $\mathcal H$, da er de også løsninger
+\begin{align}
+    \Psi = \sum_{n=1}^\infty c_nA\psi_n(x)e^{-iE_nt/\hbar}
 \end{align}
 
 \section{Hydrogenatomet}
@@ -430,10 +446,17 @@ Hvilket giver os
 \begin{align}
     T(r) = \frac{-\hbar^2}{2\mu}\nabla^2
 \end{align}
-Dette udgør nu vores Hamiltonoperator $\hat H = T(r)+V(r)$, og i TISE får vi da
+Dette udgør nu vores Hamiltonoperator $\hat H = \hat T+\hat V$ som
+\begin{align}
+\label{hydrogenhamil}
+    \hat H = \frac{-\hbar^2}{2\mu}\nabla^2 - \frac{-e^2}{4\pi \epsilon_0 r}
+\end{align}
+
+\subsection{Analytisk løsning af TISE}
+Fra (\ref{hydrogenhamil}) kan vi opskrive TISE som
 \begin{align}
 \label{unextended}
-    \qty[\frac{-\hbar^2}{2\mu}\nabla^2 - \frac{-e^2}{4\pi \epsilon_0 r}]\psi(r,\theta,\phi)=E\psi(r,\theta,\phi)
+    \qty[\frac{-\hbar^2}{2\mu}\nabla^2 - \frac{-e^2}{4\pi \epsilon_0 r}]\psi(r,\theta,\varphi)=E\psi(r,\theta,\varphi)
 \end{align}
 Vi kan repræsentere $\nabla^2$ i sfæriske koordinater fra
 \begin{align}
@@ -442,16 +465,141 @@ Vi kan repræsentere $\nabla^2$ i sfæriske koordinater fra
 Hvorfra vi kan omskrive (\ref{unextended}) som
 \begin{align}
     \begin{split}
-         -\frac{\hbar^2}{2 \mu} \left[ \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \phi^2} \right]\\ - \frac{e^2}{4 \pi \epsilon_0 r} \psi = E \psi
+         -\frac{\hbar^2}{2 \mu} \left[ \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \varphi^2} \right]\\
+         - \frac{e^2}{4 \pi \epsilon_0 r} \psi = E \psi
     \end{split}
 \end{align}
-Vi ønsker, fra separation af variable, at opdele bølgefunktionen som et produkt af 3 funktioner
+$E\psi$ kombineres med 
 \begin{align}
-    \psi(r, \theta, \phi) = R(r)\Theta (\theta) \Phi (\phi)
+\begin{split}
+    \frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial\psi}{\partial r}\right)+\frac{1}{r^2\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial\psi}{\partial\theta}\right)+\frac{1}{r^2\sin^2\theta}\frac{\partial^2\psi}{\partial\varphi^2}\\+\frac{2\mu}{\hbar^2}\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)\psi=0
+\end{split}
 \end{align}
+Man kan antage, ved seperation af variable, af bølgefunktionen er et produkt af tre funktioner
+\begin{align}
+\label{opdeling}
+    \psi(r, \theta, \varphi) = R(r)\Theta (\theta) \Phi (\varphi)
+\end{align}
+Siden ligningerne endnu er for indviklede, arbejder jeg til at begynde med, med vinkelfunktionerne i én, $A(\theta, \varphi) = \Theta(\theta)\Phi(\varphi)$. Siden radius- og vinkel er antaget uafhængigt, kan man lave en substitution hvor $\displaystyle \pdv{\psi}{\theta} = R\pdv{A}{\theta}$ og omvendt for afledede med respekt til $r$, således
+\begin{align}
+\begin{split}
+    \frac{A}{r^2}\frac{\rm d}{{\rm d}r}\left(r^2\frac{{\rm d}R}{{\rm d}r}\right)+\frac{R}{r^2\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial A}{\partial\theta}\right)+\frac{R}{r^2\sin^2\theta}\frac{\partial^2A}{\partial\varphi^2}
+    \\+\frac{2\mu}{\hbar^2}\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)RA=0\qquad
+\end{split}
+\end{align}
+Det næste mål er separere $R$ og $A$ såvidt muligt. $1/r^2$ er en gengående faktor som man kan fjerne ved multiplikation således
+\begin{align}
+\begin{split}
+    A\frac{\rm d}{{\rm d}r}\left(r^2\frac{{\rm d}R}{{\rm d}r}\right)
+    +\frac{R}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial A}{\partial\theta}\right)
+    +\frac{R}{\sin^2\theta}\frac{\partial^2A}{\partial\varphi^2}
+    \\
+    +\frac{2\mu}{\hbar^2}r^2\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)RA=0\qquad
+\end{split}
+\end{align}
+Lignende kan vi dividere med $RA$ for at få
+\begin{align}
+    \begin{split}
+        \frac{1}{R}\frac{\rm d}{{\rm d}r}\left(r^2\frac{{\rm d}R}{{\rm d}r}\right)
+        +\frac{1}{A\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial A}{\partial\theta}\right)
+        +\frac{1}{A\sin^2\theta}\frac{\partial^2A}{\partial\varphi^2}
+        \\
+        +\frac{2\mu r^2}{\hbar^2}\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)
+        =0\qquad.
+    \end{split}
+\end{align}
+Læg mærke til at de to yderste dele afhænger af $r$, mens de inderste afhænger af vinklerne (polær og azimut), som set forneden
+\begin{align}
+    \begin{split}
+        \underbrace{\frac{1}{R}\frac{\rm d}{{\rm d}r}\left(r^2\frac{{\rm d}R}{{\rm d}r}\right)
+        +\dots+\frac{2\mu r^2}{\hbar^2}\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)}_{(r)}
+        =0\qquad.
+        \\
+        \dots
+        +\overbrace{\frac{1}{A\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial A}{\partial\theta}\right)
+        +\frac{1}{A\sin^2\theta}\frac{\partial^2A}{\partial\varphi^2}}^{(\theta, \varphi)}+\dots
+        =0\qquad.
+    \end{split}
+\end{align}
+Hvis at disse dele tilsammen skal være lig 0, kræver det at de balancerer hinanden med en separationskonstant $K$. Dette betyder vi kan få to ligninger af formen
+\begin{subequations}
+\begin{align}
+\label{radi}
+    \frac{\rm d}{{\rm d}r}\left(r^2\frac{{\rm d}R}{{\rm d}r}\right)+\frac{2\mu r^2}{\hbar^2}\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)R-KR=0
+\end{align}
+og for delen afhængig af vinklerne,
+\begin{align}
+\label{angu}
+    \frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial Y}{\partial\theta}\right)+\frac{1}{\sin^2\theta}\frac{\partial^2Y}{\partial\varphi^2}+KA=0
+\end{align}
+Fra (\ref{opdeling}), opdeler jeg $A(\theta, \varphi)$ op i funktioner afhængige af hhv. polær og azimut vinklerne, ved substitution i (\ref{angu}) således
+\end{subequations}
+\begin{align}
+    \frac{\Phi}{\sin\theta}\frac{\rm d}{{\rm d}\theta}\left(\sin\theta\frac{{\rm d}\Theta}{{\rm d}\theta}\right)+\frac{\Theta}{\sin^2\theta}\frac{{\rm d}^2\Phi}{{\rm d}\varphi^2}+K\Phi\Theta=0
+\end{align}
+Dividerer man med $\Phi$, ganger med $\sin^2 \theta$ og dividerer med $\Theta$ kan man opdele de forskellige variable i forskellige dele. Derved får man følgende
+\begin{align}
+    \overbrace{\frac{\sin\theta}{\Theta}\frac{\rm d}{{\rm d}\theta}\left(\sin\theta\frac{{\rm d}\Theta}{{\rm d}\theta}\right)}^{(\theta)}
+    +\underbrace{\frac{1}{\Phi}\frac{{\rm d}^2\Phi}{{\rm d}\varphi^2}}_{(\varphi)}
+    +\overbrace{K\sin^2\theta}^{(\theta)}=0
+\end{align}
+Som før, skal disse dele balancere hinanden til 0, per en separationskonstant $C$. Igen får man to ligninger, den første afhængig af $\theta$
+\begin{subequations}
+\begin{align}
+\label{thetasol}
+    \frac{\sin\theta}{\Theta}\frac{\rm d}{{\rm d}\theta}\left(\sin\theta\frac{{\rm d}\Theta}{{\rm d}\theta}\right)+K\sin^2\theta-C=0
+\end{align}
+og en afhængig af $\varphi$ (ganget med $\Phi$)
+\begin{align}
+\label{phisol}
+    \frac{{\rm d}^2\Phi}{{\rm d}\varphi^2}+C\Phi=0
+\end{align}
+\end{subequations}
+(\ref{phisol}) kan som redegjort for i (\ref{constantodewithcoefficients}) løses generelt med (husk at $C=m^2$, som vist) 
+\begin{align}
+    \Phi(\varphi) = \alpha e^{im\varphi}+\beta e^{-im\varphi}
+\end{align}
+$m$ er igen diskret (per kontuinitetskrav), og $\beta=0$. $m$ er det første kvantetal jeg har specificeret i denne løsning. Flere vil følge. Ved løsningen af (\ref{phisol}), fandt man $C=m^2$ - dette bruges i (\ref{thetasol}) således
+\begin{align}
+    \frac{\sin\theta}{\Theta}\frac{\rm d}{{\rm d}\theta}\left(\sin\theta\frac{{\rm d}\Theta}{{\rm d}\theta}\right)+K\sin^2\theta-m^2=0
+\end{align}
+Den kan omskrives til
+\begin{align}
+\label{az1}
+    \frac{1}{\sin\theta}\frac{\rm d}{{\rm d}\theta}\left(\sin\theta\frac{{\rm d}\Theta}{{\rm d}\theta}\right)+\left(K-\frac{m^2}{\sin^2\theta}\right)\Theta=0
+\end{align}
+Bølgefunktionen kan omskrives fra en funktion af $\theta$ til en funktion af $\cos \theta$. Dvs. en substitution der lyder $Y(\cos \theta) = \Theta(\theta)$, hvilket betyder $\displaystyle \pdv{\theta} = -\sin \theta \pdv{x}$ hvor $x=\cos \theta$. Med dette kan man omskrive (\ref{az1}) til
+\begin{align}
+    \frac{1}{\sin\theta}(-\sin\theta)\frac{\rm d}{{\rm d}x}\left(\sin\theta(-\sin\theta)\frac{{\rm d}Y}{{\rm d}x}\right)+\left(K-\frac{m^2}{\sin^2\theta}\right)Y=0
+\end{align}
+Dette kan simplificeres ved at samle fællesfaktorerne til
+\begin{align}
+    \frac{\rm d}{{\rm d}x}\left(\sin^2\theta\frac{{\rm d}Y}{{\rm d}x}\right)+\left(K-\frac{m^2}{\sin^2\theta}\right)Y=0
+\end{align}
+Fra det trigonometriske identitet angivet i (\ref{trigidentity}) kan vi lave substitutionen $\sin^2\theta = 1-x^2$ således\footnote{fra den forrige substitution $x=\cos^2\theta$}
+\begin{align}
+    \frac{\rm d}{{\rm d}x}\left((1-x^2)\frac{{\rm d}Y}{{\rm d}x}\right)+\left(K-\frac{m^2}{1-x^2}\right)Y=0
+\end{align}
+Vi kan til sidst udregne den første del som
+\begin{align}
+    \frac{\rm d}{{\rm d}x}\left((1-x^2)\frac{{\rm d}Y}{{\rm d}x}\right) = (1-x^2)\frac{{\rm d}^2Y}{{\rm d}x^2}-2x\frac{{\rm d}Y}{{\rm d}x}
+\end{align}
+Hvilket giver os
+\begin{align}
+    (1-x^2)\frac{{\rm d}^2Y}{{\rm d}x^2}-2x\frac{{\rm d}Y}{{\rm d}x}+\left(K-\frac{m^2}{1-x^2}\right)Y=0
+\end{align}
+Som specificeret i (\ref{legendrede}) er dette et Legendre polynomial differentialigning. Fra (\ref{legpoly}) får vi generaliseringen (og den fundne vinkelfunktion $Y(\theta, \varphi)$)
+\begin{align}
+    Y_{\mathscr l,m}(\theta, \varphi)=(1-x^2)^{\frac{m}{2}}\left(a_0\sum_{n=0}^{\infty}\frac{a_{2n}}{a_0}x^{2n}+a_1\sum_{n=1}^{\infty}\frac{a_{2n+1}}{a_1}x^{2n+1}\right)
+\end{align}
+Kvantetallet $\mathscr l$ opstår i rekursionsformlen
+\begin{align}
+    a_{n+2}=\frac{(n+m)(n+m+1)-\mathscr l(\mathscr l+1)}{(n+1)(n+2)}a_n
+\end{align}
+Kvantetallet $m$ er afhængig af $\mathscr l$, i at det kun kan antage værdier hvor $m\leq|\mathscr l|$.
+
 \subsection{Spektrum}
 
-\subsection{Analytisk løsning}
 \section{Konklusion}
 
 \newpage
