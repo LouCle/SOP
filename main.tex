@@ -16,8 +16,8 @@
 \usepackage{graphicx}
 
 
-\usepackage{tgbonum}
-\usepackage{newtxmath}
+%\usepackage{tgbonum}
+%\usepackage{newtxmath}
 
 \usepackage[utf8]{inputenc}
 \usepackage{siunitx}
@@ -133,7 +133,7 @@
 % titlepage
 % -------------------
 \title{
-  {{Teoretisk bestemmelse af energiniveauer i hyrogenlignende atom}}\\
+  {{Teoretisk bestemmelse af energiniveauer i brintatomet}}\\
   {\large{Louis Clément, 3.i}}\\
   {\large Hillerød Tekniske Skole}\\
   \vspace{2cm}
@@ -163,7 +163,7 @@
 \newpage
 \begin{abstract}
 \noindent 
-    Jeg undersøger en teoretisk kvantemekanisk model for Hydrogenlignende atomer, og sammenligner den med den empiriske Rydbergformel, for til slut at udlede spektrumlinjer på et hydrogenlampespektrum.
+    Jeg undersøger en teoretisk kvantemekanisk model for brintatomet, og sammenligner den med den empiriske Rydberg konstant og formel, samt den efterkommende Bohr model. Eksperimentelle resultater sammenlignes med de teoretiske værdier, og en relativ fejlmargin findes til $\delta u = 0.113\%$ ved elektrontransitioner til $\psi_{2\mathscr l m}$. Den teoretiske udledning tager basis i Schrödinger-repræsentationen af kvantemekanik, som muliggør en analytisk løsning af brintlignende atomers bølgefunktion i elementærfunktioner.
 \end{abstract}
 
 \tableofcontents
@@ -172,45 +172,29 @@
 \setcounter{page}{1}
 \pagenumbering{arabic}
 
-\section{Introduktion}
-\subsection{Opgaveformulering}
-Hovedspørgsmålet lyder
-\begin{quote}
-    Teoretiskbestemmelse af energiniveauer i et hydrogenlignende atom
-\end{quote}
-Dertil en række arbejdsspørgsmål
-\begin{itemize}
-    \item Redegør for Schrödinger-ligningen
-    \item Redegør for de matematiske begreber og metoder, der ligger bag Schrödinger-ligningen, og løsningen af denne
-    \item Løs Schrödinger-ligningen for en partikel i en en-dimensionaluendelige potentialbrønd.
-    \item Bestem energiniveauerne for et hydrogenlignende atom
-    \item Analyser og perspektiverde teoretiske energiniveauer,til eksperimentelle værdier og/eller tabelværdier for hydrogens spektrum.
-    \end{itemize}
+\section{Indledning}
+Siden det sene 19. århundrede, har undersøgelse af brintatomet været et omdrejningspunkt for fysikken. Allerede i 1909 blev en klassisk-elektromagnetisk model publiceret af Ernest Rutherford, som forklarede atomet som et kompleks af forskellige partikler \parencite{olsenclassical}. Beskrivelsen var dog inakkurat, og det var først ved Niels Bohr's atommodel at en dybere kvantemekanisk natur blev postuleret. Modellen antog de diskrete principielle kvantetal der forholder sig til energiniveauer \parencite{olsenclassical}.
+\\\\
+Specielt studiet af brintatomet og des emissionsspektrum har i lang tid vakt stor interesse blandt fysikere, og da er applikationen af moderne kvantemekanik ($>$1925) på brintatomet i sammenligning med den gamle kvanteteori ($<$1925) også af interesse.
 
-\section{Gennemgang af matematiske metoder}
+\section{Benyttede matematiske metoder}
 \subsection{Hilbertrum}
-
-\begin{definition}
-  Et Hilbertrum $\mathcal H$ er et komplet vektorrum over et felt $\mathbb F$ med associeret indre produkt. Vi beskæftiger os med rum, hvori det gælder at
+  Et Hilbertrum $\mathcal H$ er et komplet vektorrum over et felt $\mathbb F$ med associeret indre produkt. Jeg beskæftiger mig med rum, hvori det gælder at
   \begin{align}
    \label{l2}
     \braket{\psi}{\psi} = \int_{\mathbb F} \psi^*(x)\psi(x) ~ dx < \infty
   \end{align}
-  for $\ket \psi \in \mathcal H$. Denne betingelse gør $\psi$ til en del af $L^2(\mathbb F)$ rum, og gælder for $\mathbb R$ eller $\mathbb C$. Vi kan konstruere et $\infty$-dimensionelt Hilbertrum ved at overveje et kontinuert basis med elementerne $\ket a$ navngivet med en kontinuer variabel $a$, normaliseret således at
+  for $\ket \psi \in \mathcal H$. Denne betingelse gør $\psi$ til en del af $L^2(\mathbb F)$ rum, og gælder for $\mathbb R$ eller $\mathbb C$. Dette er et statistisk krav. Man kan konstruere et $\infty$-dimensionelt Hilbertrum ved at overveje et kontinuert basis med elementerne $\ket a$ navngivet med en kontinuer variabel $a$, normaliseret således at
   \begin{align}
     \label{eq:con}
     \braket{a}{\tilde a} = \delta(a-\tilde a)
   \end{align}
-  hvilket betyder vi kan skrive
+  hvilket betyder man kan skrive
   \begin{align}
     \label{eq:sw}
     \ket \psi = \int \psi(a)\ket a~da
   \end{align}
   
-\end{definition}
-
-
-\begin{definition}
   En \textit{ket} vektor $\ket V$ betegner en vektor af et abstrakt
 vektorrum. I et endeligdimensionelt vektorrum kan en ket vektor
 repræsenteres som
@@ -218,9 +202,7 @@ repræsenteres som
     \label{eq:colv}
     \ket V \leftrightarrow \mqty[v_1\\v_2\\\vdots\\ v_n]
   \end{align}
-\end{definition}
 
-\begin{definition}
   En \textit{bra} vektor $\bra V$ betegner en et element af dual
 vektorrum (dualrum). Den kan repræsenteres som det transponerede
 konjugat af den ket vektor den er dual på
@@ -233,12 +215,11 @@ konjugat af den ket vektor den er dual på
   Dualrum $\mathcal H^*$ består af linære afbildninger $\H^*\to \H$,
 defineret med det indre produkt for $\langle \varphi,\cdot \rangle\in
 \H^$ som $\langle \varphi,\cdot\rangle : \psi \mapsto
-\braket{\varphi}{\psi}$.
-\end{definition}
+\braket{\varphi}{\psi}$ \parencite[0-70]{shankar}.
 
 
 \subsection{Linære operatorer}
-\begin{definition}
+
 En linær operator $\Omgea$ eller linær transformation $T$ er en
 funktion $T:\mathbb V_1 \to \mathbb V_2$ således at
 \begin{align}
@@ -247,61 +228,40 @@ funktion $T:\mathbb V_1 \to \mathbb V_2$ således at
 \end{align}
 Igennem denne tekst vil de kun repræsenteres som matricer $M$, således
 at $T(x)=Mx$. En linær operator kan i øvrigt repræsenteres som $\ket
-\psi \bra \varphi \in \mathcal H \otimes \mathcal H^*$.
+\psi \bra \varphi \in \mathcal H \otimes \mathcal H^*$ \parencite{kunze}.
 
-\end{definition}
-
-\begin{definition}
-  En kommutator er defineret som
-  \begin{align}
-    \label{eq:com}
-    [\Omega, \Lambda] = \Omega\Lambda - \Lambda \Omega
-  \end{align}
-  hvor $\Omega,\Lambda \in \H\otimes \H^*$. Hviss. $[\Omega, \Lambda]
-= 0$ kommuterer operatorerne.
-
-\end{definition}
-
-\begin{definition}
-Enhver operator i $\mathbb V^n(C)$ har $n$
-eigenværdier. Eigenværdiligningen (en omskrevet version) er
+\subsection{Associerede Legendre Polynomialer}
+Et associeret Legendre polynomial $P_{m\mathscr l}$ er løsningen til differentialligninger af formen
 \begin{align}
-  \label{eq:eigen}
-  (\Omega - \omega \hat I)\ket V = \ket 0
+    \label{legendrede}
+    (1 - x^2) \frac{d^2}{d x^2} P_\ell^m(x) - 2 x \frac{d}{d x} P_\ell^m(x) + \left[ \ell (\ell + 1) - \frac{m^2}{1 - x^2} \right] P_\ell^m(x) = 0
 \end{align}
-Betingelsen for eigenvektoren er
+Disse har generel løsning lign. \parencite{courant1953methods}
 \begin{align}
-  \label{eq:kre}
-  \det(\Omega-\omega \hat I) = 0
+    \label{legpoly}
+    P_{\mathscr l,m}=(1-x^2)^{\frac{m}{2}}\left(a_0\sum_{n=0}^{\infty}\frac{a_{2n}}{a_0}x^{2n}+a_1\sum_{n=1}^{\infty}\frac{a_{2n+1}}{a_1}x^{2n+1}\right)
 \end{align}
-hvor $\hat I$ er identitetsoperatoren. Vi kan omskrive
-eigenværdiligningen (ved at projicere den på en basis $\bra i$) til
+Med den tilhørende rekursionsligning
 \begin{align}
-  \label{eq:eig2}
-  \begin{split}
-   \bra i \Omega - \omega\hat I \ket V = 0 \\
-   \sum_j (\Omega_{ij}-\omega \delta_{ij})v_j = 0 
-  \end{split}
+    a_{n+2}=\frac{(n+m)(n+m+1)-\mathscr l(\mathscr l+1)}{(n+1)(n+2)}a_n
 \end{align}
 
-Sættes determinanten til 0 får vi karakterligningen 
+\subsection{Andre differentialligninger}
+En ordinær andenordens differentialligning med konstante koefficienter af formen
 \begin{align}
-  \label{eq:karklig}
-  \sum_{m=0}^n c_w \omega^m = 0
+\label{constantodewithcoefficients}
+    \frac{{\rm d}^2y}{{\rm d}x^2}+Cy=0
 \end{align}
-og karakterpolynomiet
+har en generel løsning af formen \parencite[492]{riley}
 \begin{align}
-  \label{eq:ei}
-  P^n(\omega) = \sum_{m=0}^n c_w \omega^m
+    \Phi = c_1e^{k_1x}+c_2e^{k_2x}
 \end{align}
-\end{definition}
+hvor $k_{1,2}=\pm\sqrt{-C}$.
 
-\section{Atomfysik og kvantemekaniske principper}
-\subsection{}
-
-\subsection{Tilstand}
+\section{Kvantemekaniske principper}
+\subsection{Kvantemekaniske tilstande}
 Tilstanden af et partikel er beskrevet med en tilstandsvektor $\ket
-\psi\in \mathcal H$. Alle observerbare kvantiteter har en associeret linær Hermitisk operator, som vi kan bruge i sammenhæng med førnævnte tilstandsvektor. Givet en operator, $\Omega$, kan man kun fysisk observere denne operators egenværdier $\omega$
+\psi\in \mathcal H$. Alle observerbare kvantiteter har en associeret linær Hermitisk operator, som man kan bruge i sammenhæng med førnævnte tilstandsvektor. Givet en operator, $\Omega$, kan man kun fysisk observere denne operators egenværdier $\omega$
 \begin{align}
     \label{eigenstate}
     \Omega\ket{\psi_i} = \omega_i \ket{\psi_i}
@@ -310,30 +270,35 @@ Tilstanden af et partikel er beskrevet med en tilstandsvektor $\ket
 \begin{align}
     \ket \psi = \sum c_i \psi_i
 \end{align}
-Efterfølgende en observation, kollapser tilstanden på en givet egentilstand. Det er vigtigt at pointere at de eneste mulige resultater for en given operators $\Omega$ observation, er dens egenværdier.
+Efterfølgende en observation, kollapser tilstanden på en givet egentilstand. Det er vigtigt at pointere at de eneste mulige resultater for en given operators $\Omega$ observation, er dens egenværdier \parencite[115]{shankar}
 
 \subsection{Schrödinger-ligningen}
-Schrödinger-ligningen er et postulat om hvordan kvantemekaniske tilstande følger givet information om tilstanden eller dens omstændigheder. Man kan skrive den tidsafhængige Schrödinger-ligning (TDSE) som
+Schrödinger-ligningen er et postulat om hvordan kvantemekaniske tilstande følger givet information om tilstanden eller dens omstændigheder \parencite[116]{shankar}. Man kan skrive den tidsafhængige Schrödinger-ligning (TDSE) som
 \begin{align}
   \label{eq:schr}
   \hat H \ket{\psi(t)} = i\hbar \partial_t \ket{\psi(t)}
 \end{align}
-Hvor $\hat H$ er Hamiltonoperatoren. 
-I positionsrum vil tilstandsvektoren udtrykkes i en basis bestående af positionsvektoren ${\ket x}$ for $x\in \mathbb R$, som $\braket{x}{\psi}$. Fra (\ref{eq:sw}) får vi 
+Hvor $\hat H$ er Hamiltonoperatoren. Den tidsuafhængige Schrödingerligning (TISE) er skrevet direkte udfra energi egenværdierne \parencite[145]{shankar} således
+\begin{align}
+    \label{tise}
+    \hat H \ket \psi = E \ket \psi
+\end{align}
+
+I positionsrum vil tilstandsvektoren udtrykkes i en basis bestående af positionsvektoren ${\ket x}$ for $x\in \mathbb R$, som $\braket{x}{\psi}$. Fra (\ref{eq:sw}) får man 
 \begin{align*}
     \ket{\psi} &= \int_{\mathbb R} \psi(\tilde x)\ket{\tilde x}~d\tilde x \\
     \braket{x}{\psi} &= \int_{\mathbb R} \psi(\tilde x)\braket{x}{\tilde x}~d\tilde x \\
     &= \psi(x,t)
 \end{align*}
-Fra den klassiske formidling af energi kan vi forstå Hamiltonen $H$ som at repræsentere summen af kinetisk $T$ og potentielt energi $V$ i et system som
+Fra den klassiske formidling af energi kan man forstå Hamiltonen $H$ som at repræsentere summen af kinetisk $T$ og potentielt energi $V$ i et system \parencite{hamill} som
 \begin{align}
     H &= T(p)+V(q)
 \end{align}
-I næste sektion vil vi bruge denne formidling for et punktpartikel ($x=x(q)$ for gen. koordinat transformation, siden position er den eneste frihedsgrad), hvor det gælder at $p=mv^2$, således at man får
+I næste sektion vil jeg bruge denne formidling for et punktpartikel ($x=x(q)$ for gen. koordinat transformation, siden position er den eneste frihedsgrad), hvor det gælder at $p=mv^2$, således at man får
 \begin{align}
     H &= \frac{p^2}{2m} + V(x)
 \end{align}
-I kvanteteori bliver vi nødt til at beskrive disse kvantiteter, $p$ og $x$ (og Hamiltonen sig selv) som observerbare variable vi kan finde ved at anvende deres tilsvarende operator på en tilstand. Dermed får vi
+I kvanteteori bliver man nødt til at beskrive disse kvantiteter, $p$ og $x$ (og Hamiltonen sig selv) som observerbare variable man kan finde ved at anvende deres tilsvarende operator på en tilstand. Dermed får man
 \begin{align}
     \hat H = \frac{\hat p^2}{2m}+V(\hat x)
 \end{align}
@@ -356,30 +321,30 @@ Vi begynder med en beskrivelse af et 1-dimensionelt potentiale $V(x)$ som set p�
     \end{cases}
 \end{align}
 \subsection{Analytisk løsning af TISE}
-I en positionsbasis kan vi omskrive TISE fra (\ref{tise}) til
+I en positionsbasis kan man omskrive TISE fra (\ref{tise}) til
 \begin{align}
      \label{awdb}
     \dv[2]{\psi}{x}+\frac{2m}{\hbar}(E-V(x))\psi = 0
 \end{align}
-Det er oplagt at inddele bølgefunktionen ind i tre regioner per potentialet. Jeg har denoteret bølgefunktionen venstre og højre region i ``væggen'' med hhv. 1 og 3 (ikke at forvirres med kvantetal). Indenfor væggene er bølgefunktionen kaldt $\psi_2$. Siden dette rimeligt kunstige potentiale er uendeligt kan et partikel selvfølgelig ikke befinde sig deri, da får vi at $\psi_1=0$ og $\psi_3=0$. Vi kan vise dette ved at løse (\ref{awdb}), hvori $V(x)$ i regionen sættes til et udefineret $\tilde V>E$, således at vi kan tilnærme os den faktiske $V$ som grænseværdi
+Det er oplagt at inddele bølgefunktionen ind i tre regioner per potentialet. Jeg har denoteret bølgefunktionen venstre og højre region i ``væggen'' med hhv. 1 og 3 (ikke at forvirres med kvantetal). Indenfor væggene er bølgefunktionen kaldt $\psi_2$. Siden dette rimeligt kunstige potentiale er uendeligt kan et partikel selvfølgelig ikke befinde sig deri, da får jeg at $\psi_1=0$ og $\psi_3=0$. Man kan vise dette ved at løse (\ref{awdb}), hvori $V(x)$ i regionen sættes til et udefineret $\tilde V>E$, således at man kan tilnærme den faktiske $V$ som grænseværdi
 \begin{align}
     \overbrace{
     \lim_{\tilde V\rightarrow \infty} \underbrace{\qty[\dv[2]{\psi_1}{x}-\frac{2m}{\hbar^2}(\tilde V-E)\psi_1]}_{\tilde \psi_1}}^{\psi_1} = 0
 \end{align}
-Denne ligning er en andensorden linær homogen differentialligning. Som set i (X.X), er løsningen for indholdet af parentesen af formen
+Denne ligning er en andensorden linær homogen differentialligning. Som set i (\ref{constantodewithcoefficients}), er løsningen for indholdet af parentesen af formen
 \begin{align}
     \tilde \psi_1 = Ae^{-kx}+Be^{kx}
 \end{align}
-Hvor $\displaystyle k = \sqrt{\frac{2m(\tilde V-E)}{\hbar^2}}$. Siden denne region er defineret for $x\leq-\frac{L}{2}$, kræves der at $\psi_1\in L^2(\mathbb R^-)$ som set i (\ref{l2}) for at dette skal repræsentere noget fysisk. Vi kan løse dette ved at sætte $A=0$, da $Ae^{-kx}$ divergerer når $x\to -\infty$, hvorved vi ender med $\tilde \psi_1=Be^{kx}$. Nu kan vi løse grænseværdien som
+Hvor $\displaystyle k = \sqrt{\frac{2m(\tilde V-E)}{\hbar^2}}$. Siden denne region er defineret for $x\leq-\frac{L}{2}$, kræves der at $\psi_1\in L^2(\mathbb R^-)$ som set i (\ref{l2}) for at dette skal repræsentere noget fysisk. Man kan løse dette ved at sætte $A=0$, da $Ae^{-kx}$ divergerer når $x\to -\infty$, hvorved man ender med $\tilde \psi_1=Be^{kx}$. Nu kan man løse grænseværdien som
 \begin{align}
     \psi_1 = \lim_{\tilde V\to \infty } Be^{kx} = 0
 \end{align}
-Lignende kan det omvendte vises for at $\psi_3=0$. Siden $V=0$ for $\psi_2$, kan vi referere til (X.X) for at få en løsning af formen
+Lignende kan det omvendte vises for at $\psi_3=0$. Siden $V=0$ for $\psi_2$, refererer jeg til (24) for at få en løsning af formen
 \begin{align}
 \label{mid}
     \psi_2 &= Ae^{ikx}+Be^{-ikx}
 \end{align}
-Hvor $\displaystyle k = \sqrt{\frac{2mE}{\hbar^2}}$. Den totale bølgefunktion $\psi$ skal selvfølgelig være kontinuer, da kræver vi at
+Hvor $\displaystyle k = \sqrt{\frac{2mE}{\hbar^2}}$. Den totale bølgefunktion $\psi$ skal selvfølgelig være kontinuer, da kræver jeg at
 \begin{align}
 \label{betingelsea}
     \psi_1\qty(-\frac{L}{2})=\psi_2\qty(-\frac{L}{2})=0
@@ -388,7 +353,7 @@ samt at
 \begin{align}
     \psi_3\qty(\frac{L}{2})=\psi_2\qty(\frac{L}{2})=0
 \end{align}
-Vi omskriver (\ref{mid}) til at være
+Jeg omskriver (\ref{mid}) til at være
 \begin{align}
     \psi_2 = A\cos(kx)+B\sin(kx)
 \end{align}
@@ -396,7 +361,7 @@ Jeg undersøger nu hvor denne nulfaktor skal komme fra ved $x=+L/2,-L/2$. Antage
 \begin{align}
 \label{forstelso}
     k=\frac{n\pi}{L},\quad n=0,~\pm~2,~\pm 4,\dots
-\end{align} I dette tilfælde kræves der at $A=0$. Gør vi det samme med $\cos(kx)$ finder man en række løsninger af samme form som (\ref{forstelso}), hvori $n$ er alle ulige naturlige tal. Dette efterlader os med en række løsninger for bølgefunktionen
+\end{align} I dette tilfælde kræves der at $A=0$. Gør man det samme med $\cos(kx)$ finder man en række løsninger af samme form som (\ref{forstelso}), hvori $n$ er alle ulige naturlige tal. Dette efterlader os med en række løsninger for bølgefunktionen
 \begin{align}
     \psi_n = \begin{cases}
     A\sin\qty(\frac{n\pi x}{L}) & n=\pm2,~\pm 4,\dots \\
@@ -419,11 +384,11 @@ da får man
     E_n = \frac{\hbar^2}{2m}k^2_n = \frac{\hbar^2\pi^2n^2}{2mL^2}
 \end{align}
 
-Med udgangspunktet i TDSE fra (\ref{eq:schr}) kan vi nu konstruere en tidsudvikling, også kaldt en stationær tilstand. Dette ligger i en antagelse af separation af variable som
+Med udgangspunktet i TDSE fra (\ref{eq:schr}) kan jeg nu konstruere en tidsudvikling, også kaldt en stationær tilstand. Dette ligger i en antagelse af separation af variable som
 \begin{align}
     \psi(x,t) = \hat K(t) \ket{\psi(x)}
 \end{align}
-For at opfylde TDSE, får vi da løsningen
+For at opfylde TDSE, får man da løsningen
 \begin{align}
     \psi_n(x,t) = A\psi_n(x)e^{-iE_nt/\hbar}
 \end{align}
@@ -434,35 +399,35 @@ Enhver linær kombination $\Psi$ vil også befinde sig i $\mathcal H$, da er de 
 
 \section{Hydrogenatomet}
 \subsection{Potentialenergi}
-Et Hydrogenlignende atom er ethvert atom der består af ét elektron samt et eller flere protoner. Problemet vi undersøger har med at gøre to ladninger, hhv. $-e$ og $+e$, samt to masser $m$ og $M$ som korresponderer til hhv. elektronet og protonet. Den reducerede masse $\mu = \frac{mM}{m+M}$. Fra Coulomb's lov, får man
+Et Hydrogenlignende atom er ethvert atom der består af ét elektron samt et eller flere protoner. Problemet jeg undersøger har med at gøre to ladninger, hhv. $-e$ og $+e$, samt to masser $m_e$ og $M$ som korresponderer til hhv. elektronet og protonet. Den reducerede masse $\mu = \frac{m_eM}{m_e+M}$. Fra Coulomb's lov, får man
 \begin{align}
     V(r) = \frac{-e^2}{4\pi \epsilon_0 r}
 \end{align}
-Hvilket beskriver potentialenergien mellem en elektronladning og atomkernen. Den kinetiske energi kan udledes fra den klassiske formalisme i.e.
+Hvilket beskriver potentialenergien mellem en elektronladning og atomkernen \parencite{griffiths}. Den kinetiske energi kan udledes fra den klassiske formalisme i.e.
 \begin{align}
     T(q) = \frac{-\hbar^2}{2m}\pdv[2]{q} 
 \end{align}
-Hvilket giver os
+Hvilket giver
 \begin{align}
     T(r) = \frac{-\hbar^2}{2\mu}\nabla^2
 \end{align}
-Dette udgør nu vores Hamiltonoperator $\hat H = \hat T+\hat V$ som
+Dette udgør nu Hamiltonoperatoren $\hat H = \hat T+\hat V$ som
 \begin{align}
 \label{hydrogenhamil}
     \hat H = \frac{-\hbar^2}{2\mu}\nabla^2 - \frac{-e^2}{4\pi \epsilon_0 r}
 \end{align}
 
 \subsection{Analytisk løsning af TISE}
-Fra (\ref{hydrogenhamil}) kan vi opskrive TISE som
+Fra (\ref{hydrogenhamil}) kan man opskrive TISE som
 \begin{align}
 \label{unextended}
     \qty[\frac{-\hbar^2}{2\mu}\nabla^2 - \frac{-e^2}{4\pi \epsilon_0 r}]\psi(r,\theta,\varphi)=E\psi(r,\theta,\varphi)
 \end{align}
-Vi kan repræsentere $\nabla^2$ i sfæriske koordinater fra
+Man kan repræsentere $\nabla^2$ i sfæriske koordinater fra
 \begin{align}
 \nabla^2f &= \frac{1}{r^2} \frac{\partial}{\partial r} \left(r^2 \frac{\partial f}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left(\sin \theta \frac{\partial f}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 f}{\partial \varphi^2},
 \end{align}
-Hvorfra vi kan omskrive (\ref{unextended}) som
+Hvorfra man kan omskrive (\ref{unextended}) som
 \begin{align}
     \begin{split}
          -\frac{\hbar^2}{2 \mu} \left[ \frac{1}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial \psi}{\partial r} \right) + \frac{1}{r^2 \sin \theta} \frac{\partial}{\partial \theta} \left( \sin \theta \frac{\partial \psi}{\partial \theta} \right) + \frac{1}{r^2 \sin^2 \theta} \frac{\partial^2 \psi}{\partial \varphi^2} \right]\\
@@ -497,7 +462,7 @@ Det næste mål er separere $R$ og $A$ såvidt muligt. $1/r^2$ er en gengående 
     +\frac{2\mu}{\hbar^2}r^2\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)RA=0\qquad
 \end{split}
 \end{align}
-Lignende kan vi dividere med $RA$ for at få
+Lignende kan man dividere med $RA$ for at få
 \begin{align}
     \begin{split}
         \frac{1}{R}\frac{\rm d}{{\rm d}r}\left(r^2\frac{{\rm d}R}{{\rm d}r}\right)
@@ -521,7 +486,7 @@ Læg mærke til at de to yderste dele afhænger af $r$, mens de inderste afhæng
         =0\qquad.
     \end{split}
 \end{align}
-Hvis at disse dele tilsammen skal være lig 0, kræver det at de balancerer hinanden med en separationskonstant $K$. Dette betyder vi kan få to ligninger af formen
+Hvis at disse dele tilsammen skal være lig 0, kræver det at de balancerer hinanden med en separationskonstant $K$. Dette betyder man kan få to ligninger af formen
 \begin{subequations}
 \begin{align}
 \label{radi}
@@ -559,7 +524,7 @@ og en afhængig af $\varphi$ (ganget med $\Phi$)
 \begin{align}
     \Phi(\varphi) = \alpha e^{im\varphi}+\beta e^{-im\varphi}
 \end{align}
-$m$ er igen diskret (per kontuinitetskrav), og $\beta=0$. $m$ er det første kvantetal jeg har specificeret i denne løsning. Flere vil følge. Ved løsningen af (\ref{phisol}), fandt man $C=m^2$ - dette bruges i (\ref{thetasol}) således
+$m$ er igen diskret\footnote{$m$ opstår siden grænsebetingelserne kræver at $\forall m\in \mathbb N$ skal bevare probablitetsstrukturen.}, og $\beta=0$. $m$ er det første kvantetal jeg har specificeret i denne løsning. Flere vil følge. Ved løsningen af (\ref{phisol}), fandt man $C=m^2$ - dette bruges i (\ref{thetasol}) således
 \begin{align}
     \frac{\sin\theta}{\Theta}\frac{\rm d}{{\rm d}\theta}\left(\sin\theta\frac{{\rm d}\Theta}{{\rm d}\theta}\right)+K\sin^2\theta-m^2=0
 \end{align}
@@ -576,7 +541,7 @@ Dette kan simplificeres ved at samle fællesfaktorerne til
 \begin{align}
     \frac{\rm d}{{\rm d}x}\left(\sin^2\theta\frac{{\rm d}Y}{{\rm d}x}\right)+\left(K-\frac{m^2}{\sin^2\theta}\right)Y=0
 \end{align}
-Fra det trigonometriske identitet angivet i (\ref{trigidentity}) kan vi lave substitutionen $\sin^2\theta = 1-x^2$ således\footnote{fra den forrige substitution $x=\cos^2\theta$}
+Fra det trigonometriske identitet angivet i (\ref{trigidentity}) kan man lave substitutionen $\sin^2\theta = 1-x^2$ således\footnote{fra den forrige substitution $x=\cos^2\theta$}
 \begin{align}
     \frac{\rm d}{{\rm d}x}\left((1-x^2)\frac{{\rm d}Y}{{\rm d}x}\right)+\left(K-\frac{m^2}{1-x^2}\right)Y=0
 \end{align}
@@ -588,19 +553,142 @@ Hvilket giver os
 \begin{align}
     (1-x^2)\frac{{\rm d}^2Y}{{\rm d}x^2}-2x\frac{{\rm d}Y}{{\rm d}x}+\left(K-\frac{m^2}{1-x^2}\right)Y=0
 \end{align}
-Som specificeret i (\ref{legendrede}) er dette et Legendre polynomial differentialigning. Fra (\ref{legpoly}) får vi generaliseringen (og den fundne vinkelfunktion $Y(\theta, \varphi)$)
+Som specificeret i (\ref{legendrede}) er dette et Legendre polynomial differentialigning. Fra (\ref{legpoly}) får man generaliseringen (og den fundne vinkelfunktion $Y(\theta, \varphi)$)
 \begin{align}
     Y_{\mathscr l,m}(\theta, \varphi)=(1-x^2)^{\frac{m}{2}}\left(a_0\sum_{n=0}^{\infty}\frac{a_{2n}}{a_0}x^{2n}+a_1\sum_{n=1}^{\infty}\frac{a_{2n+1}}{a_1}x^{2n+1}\right)
 \end{align}
-Kvantetallet $\mathscr l$ opstår i rekursionsformlen
+Kvantetallet $\mathscr l$ opstår i rekursionsformlen hvor $K=\mathscr l ( \mathscr l +1)$ ved konvergens
 \begin{align}
     a_{n+2}=\frac{(n+m)(n+m+1)-\mathscr l(\mathscr l+1)}{(n+1)(n+2)}a_n
 \end{align}
-Kvantetallet $m$ er afhængig af $\mathscr l$, i at det kun kan antage værdier hvor $m\leq|\mathscr l|$.
+Kvantetallet $m$ er afhængig af $\mathscr l$, i at det kun kan antage værdier hvor $m\leq|\mathscr l|$. Vender man tilbage til radiusfunktionen i (\ref{radi}), kan man udregne første del som
+\begin{align}
+    \dv{r}\qty ( r^2 \dv{R}{r}) = r^2 \dv[2]{R}{r} + 2r\dv{R}{r}
+\end{align}
+Dette giver os
+\begin{align}
+    r^2\frac{{\rm d}^2R}{{\rm d}r^2}+2r\frac{{\rm d}R}{{\rm d}r}+\frac{2\mu r^2}{\hbar^2}\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)R-\mathscr l(\mathscr l+1)R=0
+\end{align}
+Dividerer man med $r^2$ får man
+\begin{align}
+\label{whatbesubs}
+    \frac{{\rm d}^2R}{{\rm d}r^2}
+    +\frac{2}{r}\frac{{\rm d}R}{{\rm d}r}
+    +\left(\frac{2\mu}{\hbar^2}\left(E+\frac{Ze^2}{4\pi\epsilon_0r}\right)
+    -\frac{\mathscr l\left(\mathscr l+1\right)}{r^2}\right)R=0
+\end{align}
+Lader man $\lim_{r\to \infty} R(r)=0$, igen siden $R(r)\in L^2$, vil brøkene gå mod 0. Dette rejser også en lignende forventing: at radiusfunktionen kan skrives som et produkt af funktionerne
+\begin{align}
+    R(r) = R_{\infty}(r)F(r)
+\end{align}
+Lader man da $r\to \infty$ bliver reciprokkene 0 således
+\begin{align}
+    \frac{{\rm d}^2R_{\infty}}{{\rm d}r^2}+\frac{2\mu E}{\hbar^2}R_{\infty}=0
+\end{align}
+Igen finder man en løsning af formen
+\begin{align}
+    R_{\infty}(r)=\alpha e^{ikr}+\beta e^{-ikr}
+\end{align}
+Hvor $\displaystyle k=\sqrt{\frac{2\mu E}{\hbar^2}}$. På grund af elektronets ladning, vil løsningen være en hvor energien $E$ går mod $E_0<0$ når elektronet er i niveauer tættere på kernen. Da får man $\beta = 0$. 
+\begin{align}
+    R_\infty(r) = \alpha e^{-kr}
+\end{align}
+Hvor $k=\sqrt{-\frac{2\mu E}{\hbar^2}}$. Substituerer man nu tilbage i (\ref{whatbesubs}), får man en differentialligning der kan løses hvis $F$ ekspanderes til en potensrække således
+\begin{align}
+    R(r) = R_{\infty}(r) \sum^{\infty}_{u=0} b_ur^u
+\end{align}
+Der findes både rekursive og non-rekursive løsninger for $b_u$, dog gælder det for alle løsninger at deres konvergens afhænger af endnu et kvantetal, $n$.\footnote{En rekursiv løsning findes i \cite["The Hydrogen Atom"]{griffqm}} Da får man
+\begin{align}
+    R_{n\mathscr l}(r) = \alpha e^{-kr}b_0 e^{c_n}
+\end{align}
+Hvor $c_n=\frac{\mu e^2r}{2\pi \epsilon_0 \hbar^2 n}$. Ved energirelationen til $c_n$, får man følgende energiniveauer
+\begin{align}
+\label{hbaren}
+    E_n = \frac{-\mu e^2r^2}{8 \pi^2 \epsilon_0^2 \hbar^2 n^2}
+\end{align}
+Løsningen på bølgefunktionen vil til sidst lyde
+\begin{align}
+    \psi_{n\mathscr l m}(r, \theta, \varphi) = C R_{n\mathscr l}(r) Y_{\mathscr l m}(\cos \theta) e^{im\varphi}
+\end{align}
+Hvorved $C$ kan findes ved $\braket{\psi_{n\mathscr l m}}{\psi_{n\mathscr l m}}=1$.
 
-\subsection{Spektrum}
+\subsection{I sammenligning med Rydbergformlen}
+\subsubsection{Teoretiske forventninger}    
+Man kan kort omskrive (\ref{hbaren}) hvor $h=\hbar 2\pi$ til
+\begin{align}
+\label{energies}
+    E_n=-\frac{\mu e^4}{8\epsilon_0^2h^2n^2}
+\end{align}
+Bohr modellen angiver følgende antagelser
+\begin{enumerate}
+    \item Elektroner befinder sig i diskrete tilstande.
+    \item Elektroner emitterer ikke radiation i disse stationære tilstande eller baner.
+    \item Et elektron kan få eller tabe energi ved at ``hoppe'' fra et diskret kredsløb til en anden. Dette beskrives gennem Planck relationen, $\displaystyle \Delta E = E_2 - E_1 = h\nu $
+\end{enumerate}
+Til stor success lod denne model sig, baseret på et delvist klassisk mekanisk model for atomet, udregne til stor præcision den emitterede eller absorberede energier ved tilstandstransitioner. Før Bohr's model var Rydbergformlen også kendt per empirisk udledning. Genkald Rydbergformlen for brint
+\begin{align}
+    \frac{1}{\lambda} = R_H\qty(\frac{1}{n^2_f}-\frac{1}{n^2_i})
+\end{align}
+hvor $\lambda$ er bølgelængden på det absorberede eller emitterede foton, $n_i$ er initial energitilstanden og $n_f$ er den endelige energitilstand. $R_H$ er Rydbergkonstanten\footnote{Bemærk at ``Rydbergkonstanten'' her og flere andre steder refererer til Rydbergkonstanten \textit{for Hydrogen}. Den præcise udledte konstant er kaldt $R_\infty$ - ikke til at forveksles med radialfunktionen $R(r)$ eller $R_{\infty}(r)$.}, som er empirisk kendt til 
+\begin{align}
+    R_H^* \approx \mu \cdot R_{\infty}\pm 3\cdot 10^{-5} \s{m^{-1}}
+\end{align}
+eller udledt til
+\begin{align}
+    R_H = \frac{m_e Ze^4}{8h^2\epsilon_0^2}
+\end{align}
+per Bohr's model og udregninger \parencite{bohr}. Mine kvantemekanisk udledte energiniveauer (\ref{energies}) er konceptuelt identisk til Bohr's, til forskel af $Z$, hvor $Z$ angiver antallet af protoner i kernen. Havde jeg taget udgangspunkt i et vilkårligt antal protoner, var jeg ankommet til samme svar (da de kritiske funktioner kun har været afhængig af $r$, hvorefter linearitet har bevaret masse og ladning associeret med atomkernen). Rydbergformlen kan konstrueres ud af den udledte energisætning (\ref{energies}) ved at indsætte $\Delta n$ for energiniveauerne, da får man
+\begin{align}
+\label{rydb}
+    \Delta E_{n_i,n_f} = \frac{\mu e^4}{8\epsilon_0^2h^2}\qty(\frac{1}{n^2_f}-\frac{1}{n^2_i})
+\end{align}
+\subsubsection{Eksempel: Balmer-linjerne}
+Johann Balmer fandt i 1885, synlige emissions spektrallinjer associeret med Brintatomets emission.
+\begin{figure}[!h]
+    \centering
+    \includegraphics[width=\textwidth]{1920px-Emission_spectrum-H.svg.png}
+    \caption{Fire synlige spektrallinjer.}
+    \label{fig:my_label}
+\end{figure}
+Balmerlinjerne opstår ved skift fra en vilkårlig energitilstand til $n_f=2$ \parencite{wiese}. Dette data er præcist opstillet i Tabel \ref{tab:eksp}. 
+\begin{table}[!h]
+\label{tab:eksp}
+    \centering
+    \begin{tabular}{|l|cccccc}
+    \hline\\
+    $n_i$ & 3 & 4 & 5 & 6 & 7 & $\infty$ \\
+    $\lambda$ (nm) & 656.3 & 486.1 & 434.0 & 410.2 & 397.0 & 364.6 
+    \end{tabular}
+    \caption{Eksperimentel data ved spektralanlyse \parencite{wiese}.}
+\end{table}\\
+Tabel 2 viser de teoretisk udledte Balmerlinjer hvor $\displaystyle n_i\to n_0$, gennem Planck-Einstein relationen $\displaystyle\lambda=\frac{hc}{\Delta E}$.
+\begin{table}[!h]
+\label{tab:teor}
+    \centering
+    \begin{tabular}{|l|cccccc}
+        \hline\\
+    $n_0$ & 3 & 4 & 5 & 6 & 7 & $\infty$ \\
+    $\lambda$ (nm) & 656.1 & 486.1 & 433.9 & 410.1 & 397.0 & 364.5
+    \end{tabular}
+    \caption{Bølgelængder udregnet vha. (\ref{rydb}).}
+\end{table}
+
+Den gennemsnitlige relative fejlmargin $\delta u$ mellem eksperiment $n_i^*$ og teoretisk $n_i$ er fundet som
+\begin{align}
+    \delta u = \frac{1}{N}\sum^N_{k=1} \frac{\left| n_{i_k}^* - n_{i_k}\right|}{n_{i_k}}\cdot 100\% = 0.113\%
+\end{align}
+\subsubsection{Validitet af teoretiske forventninger}
+De teoretisk regnede værdier stemmer overens med eksperimentelle data til en acceptabel grad i forhold til de givne antagelser. Den mest vitale antagelse kommer af at modellere systemet som et 1-legeme systemet, hvori protonkernen holdes immobilt samt center for referencerammen. Dette lader mig bruge den reducerede masse mellem protonet\footnote{Eller en (stort set) vilkårlig mængde ladninger} og elektronet. $m_e/M\simeq 1/2000$, hvilket betyder at $\mu \simeq m_e$. Systemet antages også nonrelativistisk per $ \frac{1}{2}mv^2 = \frac{p^2}{m}$. 
 
 \section{Konklusion}
+Den teoretiske undersøgelse havde til formål at sammenligne en nyere kvantemekanisk model med Bohr's originale atommodel, samt den tilhørende empiriske og udledte Rydbergformel. Forholdet blev kvantificeret ved sammenligning til to andre fremsætninger for Brint-Rydbergkonstanten $R_H$:
+\begin{enumerate}
+    \item Den originale empiriske Rydbergkonstant, $R^*_H$. 
+    \item Bohr's semi-klassiske udledning af Rydbergkonstanten $R_H$.
+\end{enumerate}
+De teoretisk fundne energiniveauer i (\ref{energies}) viste sig identitiske til Bohr's fremsatte værdier, og da er den eneste forbedring i sikkerheden af værdierne i forhold til den empiriske Rydbergformel. Afsnit 5.3.3 viste at de givne antagelser har acceptabel fejlmargin ift. eksperimentelle værdier som blev produceret i afsnit 5.3.2.
+\\\\
+En konceptuel forbedring findes i fremsætningen af flere diskretiserede variable ved atomet, givet i de to andre kvantetal $\mathscr l$ og $m$. 
 
 \newpage
 \nocite{*}
